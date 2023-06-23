@@ -26,10 +26,12 @@ class ProductController extends AbstractController
         $product = $productRepository->find($id);
         $country = $countryRepository->findOneBy(['locale' => $locale]);
 
-        $vatRate = $vatRateRepository->findOneBy(['category' => $product->getCategory(), 'country' => $country])->getRate();
+        $vat = $vatRateRepository->findOneBy(['category' => $product->getCategory(), 'country' => $country]);
+        $vatRate = $vat ? $vat->getRate() : "0";
 
         $productData = [
             'name' => $product->getName(),
+            'category' => $product->getCategory()->getName(),
             'price' => $product->getPrice(),
             'vat_rate' => $vatRate,
             'final_price' => number_format($product->getPrice() * (1 + ($vatRate / 100)), 2, '.', ''),

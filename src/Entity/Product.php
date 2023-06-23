@@ -55,7 +55,6 @@ class Product
     #[Groups(['product:read', 'category:read'])]
     #[Assert\NotBlank]
     #[Assert\Positive]
-    #[Assert\Type('integer')]
     private ?string $price = null;
 
     #[ORM\ManyToOne(inversedBy: 'products')]

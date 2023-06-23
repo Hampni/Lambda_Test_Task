@@ -31,7 +31,6 @@ class VatRate
     )]
     #[Assert\NotBlank]
     #[Assert\Positive]
-    #[Assert\Type('integer')]
     private ?string $rate = null;
 
     #[ORM\ManyToOne(inversedBy: 'vatRates')]
