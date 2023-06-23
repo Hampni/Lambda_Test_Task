@@ -1,6 +1,7 @@
 version: '3'
 services:
   app:
+    container_name: lambda-app
     build:
       context: .
       dockerfile: docker/dev/Dockerfile.dev
@@ -9,15 +10,18 @@ services:
     volumes:
       - /eshop/vendor
       - /eshop/public/bundles
+      - /eshop/var
       - .:/eshop
     depends_on:
       - db
   db:
+    container_name: lambda-db
     image: mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: eshop
   phpmyadmin:
+    container_name: lambda-phpmyadmin
     image: phpmyadmin/phpmyadmin
     ports:
       - ${PMA_PORT:-8080}:80

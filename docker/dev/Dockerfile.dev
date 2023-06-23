@@ -22,6 +22,4 @@ RUN composer update
 
 COPY . /eshop
 
-RUN symfony composer req api
-
 CMD ["symfony", "server:start"]

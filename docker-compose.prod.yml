@@ -1,6 +1,7 @@
 version: '3'
 services:
   app:
+    container_name: lambda-app
     build:
       context: .
       dockerfile: docker/prod/Dockerfile.prod
@@ -9,10 +10,12 @@ services:
     volumes:
       - /var/www/html/vendor
       - /var/www/html/public/bundles
+      - /var/www/html/var
       - .:/var/www/html
     depends_on:
       - db
   db:
+    container_name: lambda-db
     image: mysql:latest
     environment:
       - MYSQL_DATABASE=eshop

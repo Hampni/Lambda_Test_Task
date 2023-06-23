@@ -14,14 +14,9 @@ WORKDIR /var/www/html
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-COPY composer.json /var/www/html/composer.json
-COPY composer.lock /var/www/html/composer.lock
-
-RUN composer update
-
 COPY . /var/www/html
 
-RUN symfony composer req api
+RUN composer update
 
 COPY docker/prod/000-default.conf /etc/apache2/sites-available/000-default.conf
 
