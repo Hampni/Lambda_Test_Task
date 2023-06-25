@@ -10,6 +10,7 @@ use ApiPlatform\Metadata\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\OpenApi\Model;
 
 
 #[ApiResource(
@@ -21,6 +22,10 @@ use ApiPlatform\Metadata\Get;
             uriTemplate: '/product_price/{id}/{iso_code}',
             routeName: 'api_product_price',
             controller: ProductController::class,
+            openapi: new Model\Operation(
+                summary: 'Get product price including commission',
+                description: 'Returns final product price including commission',
+            )
         ),
     ]
 )]
