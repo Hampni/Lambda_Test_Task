@@ -42,7 +42,7 @@ class VatRate
 
     #[ORM\ManyToOne(inversedBy: 'vatRates')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['vat_rate:read'])]
+    #[Groups(['vat_rate:read', 'country:read'])]
     #[Assert\NotBlank]
     #[Assert\Type(Category::class)]
     private ?Category $category = null;

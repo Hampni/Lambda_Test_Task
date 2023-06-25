@@ -20,11 +20,11 @@ class Category
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['category:read', 'product:read', 'vat_rate:read'])]
+    #[Groups(['category:read', 'product:read', 'vat_rate:read', 'country:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
-    #[Groups(['category:read', 'category:write', 'product:read', 'vat_rate:read'])]
+    #[Groups(['category:read', 'category:write', 'product:read', 'vat_rate:read', 'country:read'])]
     #[Assert\NotBlank]
     #[Assert\NoSuspiciousCharacters]
     #[Assert\Length(
