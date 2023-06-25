@@ -15,11 +15,12 @@ WORKDIR /eshop
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-COPY composer.json /eshop/composer.json
-COPY composer.lock /eshop/composer.lock
+COPY composer.* /eshop/
 
-RUN composer update
+RUN composer install --no-scripts --no-autoloader
 
 COPY . /eshop
+
+RUN composer dump-autoload --optimize && composer run-script post-install-cmd
 
 CMD ["symfony", "server:start"]

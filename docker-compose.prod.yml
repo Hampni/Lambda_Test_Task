@@ -12,6 +12,7 @@ services:
       - /var/www/html/public/bundles
       - /var/www/html/var
       - .:/var/www/html
+    restart: always
     depends_on:
       - db
   db:
@@ -20,3 +21,8 @@ services:
     environment:
       - MYSQL_DATABASE=eshop
       - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+volumes:
+  db_data:

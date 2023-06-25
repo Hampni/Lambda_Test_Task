@@ -12,14 +12,18 @@ services:
       - /eshop/public/bundles
       - /eshop/var
       - .:/eshop
+    restart: always
     depends_on:
       - db
   db:
     container_name: lambda-db
     image: mysql:latest
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: eshop
+      - MYSQL_DATABASE=eshop
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
   phpmyadmin:
     container_name: lambda-phpmyadmin
     image: phpmyadmin/phpmyadmin
@@ -32,3 +36,5 @@ services:
       - PMA_PASSWORD=root
     depends_on:
       - db
+volumes:
+  db_data:
